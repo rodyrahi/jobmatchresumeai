@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.24)  26 APR 2025 15:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.3) (preloaded format=pdflatex 2025.4.24)  26 APR 2025 16:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -249,12 +249,7 @@ Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 tex.def
 File: l3backend-pdftex.def 2025-03-14 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count285
-)
-
-LaTeX Warning: Unused global option(s):
-    [20pt].
-
-(C:\Users\Nitro\Desktop\magic_resume\static\temp.aux)
+) (C:\Users\Nitro\Desktop\magic_resume\static\temp.aux)
 \openout1 = `temp.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
@@ -307,31 +302,31 @@ LaTeX Font Info:    Trying to load font information for U+lasy on input line 75
 (C:\Users\Nitro\AppData\Local\Programs\MiKTeX\tex/latex/base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (9.99878pt too wide) in paragraph at lines 87--88
+Overfull \hbox (9.99878pt too wide) in paragraph at lines 94--97
 [] 
  []
 
 
-Overfull \hbox (9.99878pt too wide) in paragraph at lines 91--92
+Overfull \hbox (9.99878pt too wide) in paragraph at lines 97--98
 []  
  []
 
 
-Overfull \hbox (9.99878pt too wide) in paragraph at lines 108--110
+Overfull \hbox (9.99878pt too wide) in paragraph at lines 115--117
 []  
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 111.
+(Font)              <9> on input line 118.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 111.
+(Font)              <6> on input line 118.
 
-Overfull \hbox (9.99878pt too wide) in paragraph at lines 119--121
+Overfull \hbox (9.99878pt too wide) in paragraph at lines 125--127
 []  
  []
 
 
-Overfull \hbox (9.99878pt too wide) in paragraph at lines 130--132
+Overfull \hbox (9.99878pt too wide) in paragraph at lines 135--137
 []  
  []
 
@@ -357,17 +352,17 @@ Package rerunfilecheck Warning: File `temp.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `temp.out':
-(rerunfilecheck)             Before: 346762318EA1452B4E9034D02817787A;433
-(rerunfilecheck)             After:  35F94055612E3FE01045C5F3A9861120;492.
+(rerunfilecheck)             Before: 8EBF2C36DD4830C14D18A9866C400DA3;661
+(rerunfilecheck)             After:  331CBABE7CDBCE3CC69F67EB96C73E57;643.
  ) 
 Here is how much of TeX's memory you used:
- 9704 strings out of 469958
- 152016 string characters out of 5469813
- 566651 words of memory out of 5000000
+ 9705 strings out of 469958
+ 152029 string characters out of 5469813
+ 568647 words of memory out of 5000000
  36394 multiletter control sequences out of 15000+600000
  631721 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,300b,442s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,294b,442s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Nitro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 0900.pk> <C:\Users\Nitro\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\tcrm1000.pk><C:/Users/Nitro/AppData/Local/Programs/MiKTeX/fonts/type1/public/
@@ -382,9 +377,9 @@ sers/Nitro/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy9.p
 fb><C:/Users/Nitro/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmti10.pfb>
 Output written on C:\Users\Nitro\Desktop\magic_resume\static\temp.pdf (1 page, 
-138464 bytes).
+139625 bytes).
 PDF statistics:
- 85 PDF objects out of 1000 (max. 8388607)
- 6 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 91 PDF objects out of 1000 (max. 8388607)
+ 7 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
