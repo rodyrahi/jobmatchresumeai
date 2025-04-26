@@ -55,4 +55,13 @@ async def delete_temp_pdf():
     except FileNotFoundError:
         return {"message": "No temporary PDF found"}
 
-
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+    
+    
+    
+    
+    
+    
+    
