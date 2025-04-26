@@ -1,8 +1,9 @@
+import os
 from google import genai
 
 def generate_ats_friendly_resume(resume_text, jd_text , reference_resume="reference_resume.tex"):
     # Set up your Gemini API key
-    api_key = "AIzaSyCF4swzNSmQA29kyMsdbsV0VcSSuQd-c-0"  # Replace with your Gemini API key
+    api_key = os.getenv("GEMINI_API_KEY")  # Get API key from environment variable
 
     # Define the prompt for Gemini
 
