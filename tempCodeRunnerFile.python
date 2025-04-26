@@ -1,0 +1,99 @@
+# %%
+jd_text = """
+
+A “Senior Data Scientist" at My11circle would be responsible for working in tandem with business stakeholders from requirement gathering to delivering the results in production and model observability. This involves hands-on coding, a prudent balance between data science modeling and MLops while guiding data scientists. The scope of this role extends to handling multiple projects in parallel, where requirements are driven by sporting events such as IPL, world cup and so on, leading to high-velocity data to be processed for event-based decision making.
+
+
+Expectations from an ideal candidate:
+
+
+
+Go well beyond predictive models:
+Delve into causal modeling(uplift, propensity matching)
+Setting up and running experiments (AB test and more)
+Simulate gameplay such as ball-by-ball events (MCMC, bayesian methods, …)
+Quantifying uncertainty of the model predictions (quantile/ordinal regression, conformal methods, …) and so on.
+Technical Leadership: Lead the team of data scientists by example, write and review code, document and deliver results during tight deadlines.
+Stakeholder management: Maintain a clear line of communication between oneself and product/business team stakeholders. Ideate and consult with your DataScience manager and leaders.
+Focus on MLops: Sense of ownership in maintaining pipelines, models and following data/model observability.
+
+
+Technical Stack (Good to have):
+
+Proficiency in python data science stack
+SQL
+Familiarity with Spark (we use databricks!)
+Understanding of Statistics (undergrad level)
+
+"""
+
+# %%
+from PyPDF2 import PdfReader
+
+# Load the PDF file
+pdf_path = r'C:\Users\Nitro\Desktop\magic_resume\input_data\Trivendra_resume_2025.pdf'  # Replace with the path to your PDF file
+reader = PdfReader(pdf_path)
+
+# Extract text from each page
+resume_text = ""
+for page in reader.pages:
+    resume_text += page.extract_text()
+
+print(resume_text)
+
+# %%
+from google import genai
+
+# Set up your Gemini API key
+api_key = "AIzaSyCF4swzNSmQA29kyMsdbsV0VcSSuQd-c-0"  # Replace with your Gemini API key
+
+# Define the prompt for Gemini
+prompt = f"""
+Given the following job description (jd_text) and resume (resume_text), create an ATS-friendly resume in LaTeX format. 
+Ensure the formatting is optimized for ATS systems and aligns with the job description.
+
+Job Description:
+{jd_text}
+
+Resume:
+{resume_text}
+
+Output the resume in LaTeX format:
+"""
+
+client = genai.Client(api_key=api_key)
+
+# Send the request to Gemini
+response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    contents=prompt,
+    
+)
+
+# Extract and print the LaTeX output
+
+
+# %%
+latex_out = response.text
+
+# %%
+from pdflatex import PDFLaTeX
+import os
+
+# Save the LaTeX content to a .tex file
+latex_file = "resume.tex"
+pdf_file = "resume.pdf"
+
+with open(latex_file, "w") as file:
+    file.write(latex_out)
+
+
+pdfl = PDFLaTeX.from_texfile("resume.tex")
+pdf, log, completed_process = pdfl.create_pdf(keep_pdf_file=True, keep_log_file=True)
+
+
+
+# %%
+
+
+
