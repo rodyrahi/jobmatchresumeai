@@ -20,30 +20,48 @@ def extract_text_from_pdf(pdf_file):
 
 
 def try_latex_commands(latex_code, timeout_seconds=30):
-    
     commands = ["pdflatex", "xelatex", "lualatex"]
     folder_name = f"{uuid.uuid4().int % 1000}"
-    static_tmpdir = os.path.join(os.getcwd(), "static", "tmp", folder_name)  
-    os.mkdir(path=static_tmpdir, exist_ok=True)
-    tex_path = static_tmpdir / f"resume.tex"
-    pdf_path = static_tmpdir / f"resume.pdf"
+    static_tmpdir = os.path.join("static", folder_name)
+    os.makedirs(static_tmpdir, exist_ok=True)
 
-    tex_path.write_text(latex_code, encoding="utf-8")
+    tex_path = os.path.join(static_tmpdir, "resume.tex")
+    pdf_path = os.path.join(static_tmpdir, "resume.pdf")
+
+    # Write LaTeX code to file and ensure it's flushed to disk
+    with open(tex_path, "w", encoding="utf-8") as tex_file:
+        tex_file.write(latex_code)
+        tex_file.flush()
+        os.fsync(tex_file.fileno())  # Ensure file is written to disk
+
+    if not Path(tex_path).exists():
+        raise FileNotFoundError(f"TeX file not found at {tex_path}")
+
+    print(f"Created .tex file at: {tex_path}")
+    print(f"Temporary directory: {static_tmpdir}")
 
     for command in commands:
         try:
+            # Small delay to ensure file system is ready
+            time.sleep(0.1)
             result = subprocess.run(
-                [command, "-interaction=nonstopmode", "-output-directory", str(static_tmpdir), str(tex_path)],
+                [command, "-interaction=nonstopmode", "-output-directory", static_tmpdir, tex_path],
                 capture_output=True,
                 text=True,
                 check=False,
                 timeout=timeout_seconds
             )
-            if pdf_path.exists():
-                print(pdf_path)
-                # time.sleep(50)
+            print(f"Command {command} output: {result.stdout}")
+            print(f"Command {command} errors: {result.stderr}")
+
+            if Path(pdf_path).exists():
+                print(f"PDF generated at: {pdf_path}")
                 return pdf_path, static_tmpdir
-            
+            else:
+                print(f"PDF not found after running {command}")
+
+        except subprocess.TimeoutExpired:
+            print(f"Timeout running {command}")
         except Exception as e:
             print(f"Error using {command}: {e}")
 
