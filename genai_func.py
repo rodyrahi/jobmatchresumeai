@@ -1,8 +1,12 @@
 import os
 from google import genai
+from dotenv import load_dotenv
+load_dotenv()
 
 def generate_ats_friendly_resume(resume_text, jd_text , reference_resume=os.path.join("static", "reference_resumes", "reference_resume.tex")):
     # Set up your Gemini API key
+    
+    # Ensure the GEMINI_API_KEY is set in the environment
     api_key = os.getenv("GEMINI_API_KEY")  # Get API key from environment variable
 
     # Define the prompt for Gemini
