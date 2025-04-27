@@ -21,8 +21,8 @@ def extract_text_from_pdf(pdf_file):
 
 def try_latex_commands(latex_code, timeout_seconds=30):
     commands = ["pdflatex", "xelatex", "lualatex"]
-    folder_name = f"{uuid.uuid4().int % 1000}"
-    static_tmpdir = os.path.join("static", folder_name)
+    folder_name = f"{uuid.uuid4().int % 1000000:06d}"
+    static_tmpdir = os.path.join("static" ,"tmp", folder_name)
     os.makedirs(static_tmpdir, exist_ok=True)
 
     tex_path = os.path.join(static_tmpdir, "resume.tex")
