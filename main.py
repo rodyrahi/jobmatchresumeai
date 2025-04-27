@@ -2,6 +2,8 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi import BackgroundTasks
+import shutil
 
 from process_pdf import extract_text_from_pdf , try_latex_commands
 from genai_func import generate_ats_friendly_resume 
@@ -30,11 +32,10 @@ async def send_resume(request: Request):
     resume_text = extract_text_from_pdf(file.file)
     response_letex = generate_ats_friendly_resume(resume_text , form_data["jobDescription"])
     
-    pdf_content = try_latex_commands(response_letex)
-    # with open("static/resume.pdf", "wb") as f:
-    #     f.write(pdf_content)    
+    pdf_path, folder_path = try_latex_commands(response_letex)
+    folder_path = str(folder_path).replace("\\", "/")   
     
-    return templates.TemplateResponse("show_latex.html", { "request": request ,"pdf_content": "static/temp.pdf"})
+    return templates.TemplateResponse("show_latex.html", { "request": request ,"pdf_path": pdf_path , "folder_path": folder_path})
 
 
 
@@ -44,16 +45,24 @@ async def send_resume(request: Request):
 async def read_root(request: Request):
     return templates.TemplateResponse("show_latex.html", {"request": request})
 
+import os
 
 
-@app.get("/delete_onload")
-async def delete_temp_pdf():
-    import os
+@app.post("/delete_folder")
+async def delete_folder(request: Request):
+    form_data = await request.form()
+    folder = form_data["name"].replace("resume.pdf", "")
+    folder = folder.strip("/")  # Remove leading/trailing slashes
+    folder_path = os.path.abspath(folder)  # Get absolute path
+    
     try:
-        os.remove("static/temp.pdf")
-        return {"message": "Temporary PDF deleted successfully"}
-    except FileNotFoundError:
-        return {"message": "No temporary PDF found"}
+        if os.path.exists(folder_path):
+            shutil.rmtree(folder_path, ignore_errors=False)
+            return {"message": f"Successfully deleted folder: {folder_path}"}
+        else:
+            return {"message": f"Folder not found: {folder_path}"}
+    except Exception as e:
+        return {"message": f"Error deleting folder: {str(e)}"}
 
 if __name__ == "__main__":
     import uvicorn

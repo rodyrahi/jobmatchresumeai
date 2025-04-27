@@ -1,0 +1,136 @@
+\documentclass[a4paper,20pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[pdftex]{hyperref}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.530in}
+\addtolength{\evensidemargin}{-0.375in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.45in}
+\addtolength{\textheight}{1in}
+
+\urlstyle{rm}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-10pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeItemWithoutTitle}[1]{
+  \item\small{
+    {\vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{#3} & \textit{#4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-3pt}}
+
+\renewcommand{\labelitemii}{$\,$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-----------------------------
+%%%%%%  CV STARTS HERE  %%%%%%
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{{\LARGE Rajvendra Rahi}} & Email: \href{mailto:rajvendrarahi126@gmail.com}{rajvendrarahi126@gmail.com}\\
+  LinkedIn: Rajvendra Rahi & Mobile:~~~+91-8109204371 \\
+  GitHub: Rajvendra Rahi \\
+\end{tabular*}
+
+%-----------EDUCATION-----------------
+\section{~~Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Barkatullah University (BUIT)}{Bhopal, India}
+      {Bachelor of Technology - Computer Science Engineering;  GPA: 7.2}{2020 - 2024}
+      {}\resumeSubHeadingListEnd
+	    
+\vspace{-5pt}
+\section{Skills Summary}
+	\resumeSubHeadingListStart
+	\resumeSubItem{Programming Languages}{Python, PostgreSQL, MySQL}
+	\resumeSubItem{Data Science Tools}{Pandas, NumPy, Scikit-learn, TensorFlow}
+	\resumeSubItem{Data Visualization}{Microsoft Power BI, Tableau, Seaborn, Matplotlib}
+	\resumeSubItem{Data Management & Analysis}{Excel, Power Query Editor, DAX}
+	\resumeSubItem{Machine Learning & AI}{Machine Learning, Feature Engineering, Statistics, Deep Learning, NLP}
+\resumeSubHeadingListEnd
+\vspace{-5pt}
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading{AlmaBetter}{Bengaluru (Remote)}
+    {Data Scientist Trainee}{Jan 2024 - Present}
+    \resumeItemListStart
+        \resumeItem{Machine Learning Model Training}{Trained and optimized machine learning models utilizing algorithms such as Linear Regression, KNN, Decision Trees, and XGBoost; achieved classification accuracy of 87%.}
+        \resumeItem{Collaboration}{Cultivated strong collaboration skills through participation in multidisciplinary projects, resulting in a 15% increase in team output and the successful completion.}
+      \resumeItemListEnd
+\vspace{-5pt}
+
+\resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------------
+\vspace{-5pt}
+\section{Projects}
+\resumeSubHeadingListStart
+\resumeSubItem{Credit Score Prediction}{Python, Sklearn, Logistic Regression (Oct 2024)}
+\resumeItemWithoutTitle{Applied robust data cleaning, visualization, and feature extraction techniques to improve the accuracy of predicting user credit scores by 15%. Implemented machine learning models such as Logistic Regression and Random Forest, optimizing hyper parameters to enhance model performance and stability.}
+
+\vspace{2pt}
+\resumeSubItem{Book Recommendation System}{Cosine Similarity (Feb 2024)}
+\resumeItemWithoutTitle{Developed a high-accuracy Book Recommendation System using Python, achieving a 90% accuracy rate in book recommendations by implementing cosine similarity. Utilized data processing and machine learning libraries, including Pandas, NumPy, and scikit-learn, to efficiently preprocess large datasets and build recommendation models. Evaluated and fine-tuned the model using metrics such as precision, recall, and cosine similarity scores to maximize recommendation quality and maintain a user-focused experience.}
+
+\vspace{2pt}
+\resumeSubItem{Sky Analytics Airline and Airport Operations Analysis}{MS Excel (Oct 2024)}
+\resumeItemWithoutTitle{Leveraged advanced Excel techniques for an in-depth analysis of approximately 70,000 flight records, examining delays, cancellations, airline performance, and airport traffic. Developed functional dashboards that revealed key insights, including that 3.91\% flights got canceled, while 49.05\% got delayed. The dashboards also identified top-performing airlines. Enabling data-driven decisions to improve operational efficiency and enhance customer satisfaction through targeted improvements in airline and airport performance.}
+\resumeSubHeadingListEnd
+
+
+\vspace{-5pt}
+\section{Certifications}
+\resumeSubHeadingListStart
+    \resumeSubItem{Advanced Certification in Full Stack Data Science & AI}{Indian Institute of Technology (IIT) - Dec 2024}
+    \resumeSubItem{Completed Certification in Artificial Intelligence and Full Stack Data Science}{AlmaBetter/IIT Verified}
+\resumeSubHeadingListEnd
+
+
+\end{document}
