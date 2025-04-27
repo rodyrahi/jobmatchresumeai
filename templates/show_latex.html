@@ -1,25 +1,33 @@
+
+<script>
+  const downloadLink = document.getElementById('download_resume');
+
+  console.log(downloadLink);        
+  downloadLink.classList.remove('d-none');
+  downloadLink.href = pdf_path ;
+</script>
+
 <div id="pdf-viewer" class="" style="height: 100%; padding: 0; ">
   <iframe id="pdf-iframe" src="{{ pdf_path }}" width="100%" style="border: none;    height:100%;" hx-post="/delete_folder" hx-trigger="load delay:10s" hx-vals='{"name": "{{ folder_path }}"}'>
-
   </iframe>
 </div>
 
 
 
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const viewer = document.getElementById('pdf-iframe');
-    viewer.onload = function() {
-      // PDF loaded
-      console.log('PDF loaded successfully');
-    };
-  });
-</script>
 
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const viewer = document.getElementById('pdf-iframe');
+      viewer.onload = function() {
+        // PDF loaded
+        console.log('PDF loaded successfully');
 
-
+      };
+    });
+  </script>
+  
 
 <!-- <div id="adobe-dc-view"></div>
 <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
