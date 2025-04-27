@@ -39,7 +39,7 @@
     }
     #preview {
       background-color: #ffffff;
-      border: 2px dashed #273F4F;
+      border: 1px dashed #273F4F;
       padding: 1rem;
       border-radius: 8px;
       min-height: 90vh;
@@ -60,80 +60,88 @@
 
 <body>
   <div class="container">
+    <div class="row">
+      <nav class="navbar navbar-expand-lg navbar-custom mb-2 " style="border-bottom: 2px solid #FE7743;">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold" href="#">Job Match Resume AI</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="background-color: white;"></span>
+          </button>
+          <!-- <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+          </div> -->
+        </div>
+      </nav>
+  
+    </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom mb-2" style="border-bottom: 2px solid #FE7743;">
-      <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">Job Match Resume AI</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon" style="background-color: white;"></span>
-        </button>
-        <!-- <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-          </ul>
-        </div> -->
-      </div>
-    </nav>
 
     <!-- Main Section -->
     <div class="row" style="min-height: 90vh;">
       
       <!-- Form Section -->
-      <div class="col-md-6 mb-4">
-        <form hx-post="/send_resume" hx-encoding="multipart/form-data" hx-target="#preview" hx-swap="innerHTML" enctype="multipart/form-data" class="p-4 rounded shadow form-custom">
-          <div class="job-description">
-            
-            <div class="mb-4">
-              <div class="file-uploading">
-                <div class="mb-3">
-                  <label for="resumeFile" class="form-label fw-bold">
-                    <i class="fas fa-file-upload me-2"></i>Upload Resume
-                  </label>
-                  <div class="input-group">
-                    <span class="input-group-text">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <input class="form-control border-dark" type="file" name="resumeFile" id="resumeFile" accept=".pdf,.doc,.docx">
+      <div class="col-md-6  ">
+        <div class="row px-1 ">
+          <form hx-post="/send_resume" hx-encoding="multipart/form-data" hx-target="#preview" hx-swap="innerHTML" enctype="multipart/form-data" class=" p-4 rounded shadow form-custom">
+            <div class="job-description">
+              
+              <div class="mb-4">
+                <div class="file-uploading">
+                  <div class="mb-3">
+                    <label for="resumeFile" class="form-label fw-bold">
+                      <i class="fas fa-file-upload me-2"></i>Upload Resume
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <input class="form-control border-dark" type="file" name="resumeFile" id="resumeFile" accept=".pdf,.doc,.docx">
+                    </div>
                   </div>
                 </div>
+  
+                <label for="jobDescription" class="form-label fw-bold">
+                  <i class="fas fa-briefcase me-2"></i>Job Description
+                </label>
+                <div class="input-group">
+                  <textarea class="form-control border-dark" name="jobDescription" id="jobDescription" rows="20" placeholder="Enter the job description here..."></textarea>
+                </div>
               </div>
-
-              <label for="jobDescription" class="form-label fw-bold">
-                <i class="fas fa-briefcase me-2"></i>Job Description
-              </label>
-              <div class="input-group">
-                <textarea class="form-control border-dark" name="jobDescription" id="jobDescription" rows="20" placeholder="Enter the job description here..."></textarea>
-              </div>
+  
             </div>
-
-          </div>
-
-          <button type="submit" class="btn btn-custom btn-lg w-100 mt-3">
-            <span class="htmx-indicator-inverse">
-              <i class="fas fa-paper-plane me-2"></i>Submit
-            </span>
-            <span id="loading-indicator" class="htmx-indicator spinner-border spinner-border-sm" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </span>
-          </button>
-
-        </form>
+  
+            <button type="submit" class="btn btn-custom btn-lg w-100 mt-3">
+              <span class="htmx-indicator-inverse">
+                <i class="fas fa-paper-plane me-2"></i>Submit
+              </span>
+              <span id="loading-indicator" class="htmx-indicator spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </span>
+            </button>
+  
+          </form>
+        </div>
+       
       </div>
 
       <!-- Preview Section -->
-      <div class="col-md-6 pe-0">
-        <div class="row w-100"  id="preview" style="height: 100%;">
+      <div class="col-md-6">
+        <div class="row  p-0"  id="preview" style="height: 100%;">
          
         </div>
+
+
         <!-- Results will be shown here after submission -->
       </div>
 

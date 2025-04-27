@@ -42,12 +42,6 @@
   }
 }
 
-\newcommand{\resumeItemWithoutTitle}[1]{
-  \item\small{
-    {\vspace{-2pt}}
-  }
-}
-
 \newcommand{\resumeSubheading}[4]{
   \vspace{-1pt}\item
     \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
@@ -56,10 +50,9 @@
     \end{tabular*}\vspace{-5pt}
 }
 
-
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-3pt}}
 
-\renewcommand{\labelitemii}{$\,\circ$}
+\renewcommand{\labelitemii}{$\circ$}
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
@@ -73,17 +66,9 @@
 
 %----------HEADING-----------------
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{{\LARGE Trivendra Rahi}} & Email: \href{mailto:trivendra.rahi05@gmail.com}{trivendra.rahi05@gmail.com}\\
-   & Mobile: +91-706843851\\
-  \href{https://linkedin.com/in/trivendra-rahi}{LinkedIn: linkedin.com/in/trivendra-rahi} & \\
-
-
-
-
-
-
-
-
+  \textbf{{\LARGE Trivendra Rahi}} & Email: \href{mailto:trivendra.rahi05@gmail.com}{trivendra.rahi05@gmail.com}\ \ 
+  linkedin.com/in/trivendra-rahi & Mobile:~~~+91-706843851 \\
+  Bengaluru, Karnataka, India &  \\
 \end{tabular*}
 
 %-----------EDUCATION-----------------
@@ -97,70 +82,61 @@
       {BTECH in Mechanical Engineering}{2016-2020}
   \resumeSubHeadingListEnd
 
-
-\section{Skills Summary}
- \resumeSubHeadingListStart
- \resumeSubItem{Machine Learning}{TensorFlow, Keras, Scikit-learn, Neural Networks, Predictive Analytics}
- \resumeSubItem{Data Analysis}{Statistical Data Analysis, Time Series Analysis, Data Wrangling, Data Visualization}
- \resumeSubItem{Programming}{Python, SQL, R, Matlab}
- \resumeSubItem{Tools}{Pandas, Numpy, Excel, Dataiku, Github, JMP, Plotly, Spotfire, OpenCV}
- \resumeSubHeadingListEnd
-
 %-----------EXPERIENCE-----------------
 \section{~~Experience}
   \resumeSubHeadingListStart
 
-    \resumeSubheading
-      {GE Aerospace}{Bengaluru, India}
-      {Senior Data Scientist | Fleet Analytics}{July 2024 - Present}
-      \resumeItemListStart
-        \resumeItem{Machine Learning Model Development}{Led end-to-end development of machine learning models to predict hardware conditions, from problem definition to industrial deployment.}
-        \resumeItem{Stakeholder Collaboration}{Collaborated with stakeholders to align analytics with business goals, define success criteria, and identify data requirements.}
-        \resumeItem{Data Analysis and Preprocessing}{Conducted data preprocessing, validation, and exploratory analysis to identify key predictors and ensure data quality.}
-        \resumeItem{Model Deployment}{Designed, trained, and deployed robust machine learning models, achieving a 15\% increase in success criteria for a key analytics project under my leadership.}
-      \resumeItemListEnd
+    \resumeSubheading{GE Aerospace}{Bengaluru, India}
+    {Senior Data Scientist | Fleet Analytics}{July 2024 - Present}
+    \resumeItemListStart
+        \resumeItem{Led Development}{Led end-to-end development of machine learning models to predict hardware conditions.}
+        \resumeItem{Collaborated}{Collaborated with stakeholders to align analytics with business goals and define success criteria.}
+        \resumeItem{Data Analysis}{Conducted data preprocessing, validation, and exploratory analysis.}
+        \resumeItem{Model Deployment}{Achieved a 15\% increase in success criteria for a key analytics project.}
+    \resumeItemListEnd
 
-    \resumeSubheading
-      {GE Aerospace}{Bengaluru, India}
-      {Edison Engineer | Image Analytics}{January 2024 - July 2024}
-      \resumeItemListStart
-        \resumeItem{CNN Architecture Optimization}{Developed and optimized CNN architectures (VGG16, InceptionNet, ResNet, UNet) using TensorFlow for image classification and segmentation.}
-        \resumeItem{Model Training Pipeline}{Delivered a new model training and inference pipeline using Keras, improving model development time by 30\%.}
+    \resumeSubheading{GE Aerospace}{Bengaluru, India}
+    {Edison Engineer | Image Analytics}{January 2024 - July 2024}
+    \resumeItemListStart
+        \resumeItem{CNN Architectures}{Developed and optimized CNN architectures (VGG16, InceptionNet, ResNet, UNet) using TensorFlow.}
+        \resumeItem{Model Pipeline}{Delivered a new model training and inference pipeline using Keras, improving model development time by 30\%.}
         \resumeItem{Image Processing}{Utilized OpenCV for advanced image processing tasks.}
-        \resumeItem{Aerospace Applications}{Contributed to robust image analytics models for aerospace applications.}
-      \resumeItemListEnd
+    \resumeItemListEnd
 
-    \resumeSubheading
-      {GE Aerospace}{Bengaluru, India}
-      {Edison Engineer | Fleet Analytics}{August 2022 - December 2023}
-      \resumeItemListStart
-        \resumeItem{Analytics Pipeline Development}{Developed a full analytics pipeline for the Long Haul Analytics team, addressing a new use case from problem definition to model deployment.}
-        \resumeItem{Maintenance Cost Reduction}{Designed and implemented machine learning models that reduced maintenance costs by 15\%.}
-        \resumeItem{Cross-functional Collaboration}{Collaborated with cross-functional teams to ensure successful deployment and adoption of the solution.}
-        \resumeItem{Physics-Based Modeling}{Improved physics-based modeling, leading to a significant reduction in maintenance burden for airline customers.}
-        \resumeItem{Outlier Detection}{Developed standard method of outlier detection and removal and presented in the interval board to set it as standard process for all other analytics.}
-      \resumeItemListEnd
+    \resumeSubheading{GE Aerospace}{Bengaluru, India}
+    {Edison Engineer | Fleet Analytics}{August 2022 - December 2023}
+    \resumeItemListStart
+        \resumeItem{Analytics Pipeline}{Developed a full analytics pipeline for the Long Haul Analytics team.}
+        \resumeItem{Cost Reduction}{Implemented machine learning models that reduced maintenance costs by 15\%.}
+        \resumeItem{Physics-based Modeling}{Improved physics-based modeling, leading to a significant reduction in maintenance burden.}
+        \resumeItem{Outlier Detection}{Developed standard method of outlier detection and removal.}
+    \resumeItemListEnd
 
   \resumeSubHeadingListEnd
 
+%-----------SKILLS-----------------
+\section{~~Skills}
+  \resumeSubHeadingListStart
+    \resumeSubItem{Programming Languages}{Python (Advanced), SQL, R}
+    \resumeSubItem{Machine Learning}{TensorFlow, Keras, Scikit-learn, Pandas, NumPy}
+    \resumeSubItem{Data Visualization}{Matplotlib, Seaborn, Plotly}
+    \resumeSubItem{Tools}{Excel, Dataiku, Github, Matlab, JMP, Spotfire}
+    \resumeSubItem{Skills}{Machine Learning, Statistical Data Analysis, Computer Vision, Time Series Analysis, Predictive Analytics, Data Wrangling, Mechanical Engineering, Artificial Neural Networks, Data Visualization}
+  \resumeSubHeadingListEnd
 
 %-----------CERTIFICATIONS-----------------
 \section{~~Certifications}
-\resumeSubHeadingListStart
-    \resumeSubItem{Google}{Foundation: Data, Data, Everywhere}
-    \resumeSubItem{Google}{Ask Questions to Make Data-Driven Decisions}
-    \resumeSubItem{DeepLearning.AI}{Neural Network and Deep Learning}
-    \resumeSubItem{DeepLearning.AI}{Convolutional Neural Network}
-    \resumeSubItem{Udemy}{Python for Data Science and Machine Learning Bootcamp}
-    \resumeSubItem{Udemy}{100 Days of Code – The Complete Python Pro Bootcamp}
-\resumeSubHeadingListEnd
+  \resumeSubHeadingListStart
+    \resumeSubItem{Google}{Foundation: Data, Data, Everywhere; Ask Questions to Make Data-Driven Decisions}
+    \resumeSubItem{DeepLearning.AI}{Neural Network and Deep Learning; Convolutional Neural Network}
+    \resumeSubItem{Udemy}{Python for Data Science and Machine Learning Bootcamp; 100 Days of Code – The Complete Python Pro Bootcamp}
+  \resumeSubHeadingListEnd
 
-%-----------Activities and Interests-----------------
+
+%-----------ACTIVITIES-----------------
 \section{~~Activities and Interests}
-\resumeSubHeadingListStart
-    \resumeSubItem{}{Chess, Video Games, Table Tennis, Traveling, Documentaries}
-\resumeSubHeadingListEnd
-
-
+\begin{itemize}[leftmargin=*]
+    \item Chess, Video Games, Table Tennis, Travelling, Documentaries
+\end{itemize}
 
 \end{document}
