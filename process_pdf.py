@@ -23,8 +23,7 @@ def try_latex_commands(latex_code, timeout_seconds=30):
     
     commands = ["pdflatex", "xelatex", "lualatex"]
     folder_name = f"{uuid.uuid4().int % 1000}"
-    
-    static_tmpdir = Path(f"static/tmp/{folder_name}")
+    static_tmpdir = os.path.join(os.getcwd(), "static", "tmp", folder_name)  
     static_tmpdir.mkdir(parents=True, exist_ok=True)
     tex_path = static_tmpdir / f"resume.tex"
     pdf_path = static_tmpdir / f"resume.pdf"
