@@ -80,7 +80,7 @@ async def create_resume(request: Request):
     
     return templates.TemplateResponse("show_latex.html", { "request": request ,"pdf_path": pdf_path , "folder_path": folder_path})
 
-
+import re
 
 
 @app.post("/extract_linkedin_jd")
@@ -88,6 +88,12 @@ async def extract_linkedin_jd(request: Request):
     try:
         form_data = await request.form()
         linkedin_url = form_data["linkedin_url"]
+        
+        
+    
+        match = re.search(r'(https?://(www\.)?linkedin\.com/[^\s]+)', linkedin_url)
+        linkedin_url = match.group(1) if match else None
+
         
         # Import necessary libraries
         import requests
