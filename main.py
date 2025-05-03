@@ -83,6 +83,43 @@ async def create_resume(request: Request):
 
 
 
+@app.post("/extract_linkedin_jd")
+async def extract_linkedin_jd(request: Request):
+    try:
+        form_data = await request.form()
+        linkedin_url = form_data["linkedin_url"]
+        
+        # Import necessary libraries
+        import requests
+        from bs4 import BeautifulSoup
+        
+        # Send GET request to LinkedIn URL
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+        response = requests.get(linkedin_url, headers=headers)
+        
+        # Parse HTML content
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        # Find job description section
+        # Note: LinkedIn's structure might change, so selectors might need updates
+        job_description = soup.find('div', {'class': 'description__text'})
+        
+        if job_description:
+            # Clean and extract text
+            jd_text = job_description.get_text(strip=True)
+            print(jd_text)
+            return jd_text
+        else:
+            pass
+            
+    except Exception as e:
+        pass
+
+
+
+
 
 if __name__ == "__main__":
     import uvicorn
