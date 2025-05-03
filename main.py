@@ -18,7 +18,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("new_design_bs4.html", {"request": request})
 
 
 
@@ -64,11 +64,25 @@ async def delete_folder(request: Request):
     except Exception as e:
         return {"message": f"Error deleting folder: {str(e)}"}
 
+
+
+
+@app.post("/create_resume")
+async def create_resume(request: Request):
+    form_data = await request.form()
+    form_dict = dict(form_data)
+    
+    print(form_dict)
+    return form_dict
+
+
+
+
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-    
-    
+    uvicorn.run("main:app", host="localhost", port=8000, reload=True)    
+
     
     
     

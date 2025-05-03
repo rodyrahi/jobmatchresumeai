@@ -1,0 +1,285 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Matcher – Create or Optimize Your Resume</title>
+
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Free Resume Builder | ResumeTool" />
+    <meta property="og:description" content="Get a customized resume based on your job description using AI. Download your optimized resume now." />
+    <meta property="og:url" content="https://resumetool.kamingo.in" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://resumetool.kamingo.in/static/images/icon.png" />
+  
+    <link rel="icon" type="image/x-icon" href="/static/images/icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/icon.png">
+    <link rel="apple-touch-icon" href="/static/images/icon.png">
+
+
+
+
+
+    <meta name="description" content="Build an ATS-friendly resume from scratch or optimize your existing one. Get tailored resume suggestions for any job.">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+   
+    
+
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    
+
+
+
+
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --bs-primary: #0ea5e9;
+            --bs-primary-rgb: 14, 165, 233;
+            --bs-secondary: #64748b;
+            --bs-secondary-rgb: 100, 116, 139;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            background-color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0ea5e9 0%, #7c3aed 100%);
+        }
+        
+        .file-upload {
+            border: 2px dashed #dee2e6;
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--bs-primary);
+            background-color: #f0f9ff;
+        }
+        
+        .file-upload.active {
+            border-color: #198754;
+            background-color: #ecfdf5;
+        }
+        
+        .resize-handle {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 20px;
+            height: 20px;
+            cursor: nwse-resize;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='%2394a3b8'%3E%3Cpath d='M12 12v4h4v-4h-4zm-8 0v4h4v-4H4zm8-8v4h4V4h-4zm-8 0v4h4V4H4z'/%3E%3C/svg%3E") no-repeat center;
+        }
+        
+        .preview-container {
+            transition: all 0.3s ease;
+        }
+        
+        .preview-placeholder {
+            background: linear-gradient(135deg, #f1f5f9 25%, #ffffff 25%, #ffffff 50%, #f1f5f9 50%, #f1f5f9 75%, #ffffff 75%, #ffffff 100%);
+            background-size: 40px 40px;
+            animation: move 2s linear infinite;
+        }
+        
+        @keyframes move {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--bs-primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .tab-button {
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            color: var(--bs-secondary);
+            transition: all 0.3s ease;
+            border: none;
+            background: none;
+        }
+        
+        .tab-button.active {
+            color: var(--bs-primary);
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--bs-primary);
+        }
+        
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-tag button {
+            margin-left: 0.5rem;
+            color: #0369a1;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .skill-tag button:hover {
+            opacity: 1;
+        }
+        
+        .experience-item, .education-item {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .experience-item::before, .education-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--bs-primary);
+        }
+        
+        .experience-item::after, .education-item::after {
+            content: '';
+            position: absolute;
+            left: 0.375rem;
+            top: 1.25rem;
+            bottom: -1.5rem;
+            width: 2px;
+            background-color: #e2e8f0;
+        }
+        
+        .experience-item:last-child::after, .education-item:last-child::after {
+            display: none;
+        }
+        
+        .form-section {
+            transition: all 0.3s ease;
+        }
+        
+        .form-section.hidden {
+            display: none;
+        }
+        
+        .floating-label {
+            position: absolute;
+            top: 0;
+            left: 1rem;
+            font-size: 0.75rem;
+            color: var(--bs-secondary);
+            background-color: white;
+            padding: 0 0.25rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+        
+        .input-container {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .input-container.focused .floating-label {
+            color: var(--bs-primary);
+        }
+        
+        .suggestions-dropdown {
+            position: absolute;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            margin-top: 0.25rem;
+        }
+        
+        .suggestion-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .suggestion-item:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--bs-primary);
+            box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #0c8fd9;
+            border-color: #0c8fd9;
+        }
+        
+        .bg-primary-light {
+            background-color: #e0f2fe;
+        }
+        
+        .text-primary {
+            color: var(--bs-primary) !important;
+        }
+    </style>
+</head>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'partials/header.html' %}
+
+
+
+
+
+<body>
+
+
+    <!-- Header -->
+    {% include 'partials/navbar.html' %}
+
+    {% include 'partials/main_content/main.html' %}
+
+
+    {% include 'partials/features/features.html' %}
+
+    
+    {% include 'partials/testimonials/testimonials.html' %}
+
+
+    <!-- CTA Section -->
+    <section class="py-5 gradient-bg text-white">
+        <div class="container py-5 text-center">
+            <h2 class="font-display fs-1 fw-bold mb-4">Ready to Transform Your Resume?</h2>
+            <p class="lead mb-5 mx-auto" style="max-width: 600px;">Join thousands of professionals who have improved their job prospects with AI-powered resume optimization.</p>
+            <button class="btn btn-light text-primary fw-medium px-5 py-3">
+                Get Started Now <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    {% include 'partials/footer/footer.html' %}
+
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Initialize Bootstrap tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Tab switching
+        const uploadTab = document.getElementById('uploadTab');
+        const buildTab = document.getElementById('buildTab');
+        const uploadForm = document.getElementById('uploadForm');
+        const buildForm = document.getElementById('buildForm');
+        const formTitle = document.getElementById('formTitle');
+        
+        uploadTab.addEventListener('click', () => {
+            uploadTab.classList.add('active');
+            buildTab.classList.remove('active');
+            uploadForm.classList.remove('d-none');
+            buildForm.classList.add('d-none');
+            formTitle.textContent = 'Resume Details';
+        });
+        
+        buildTab.addEventListener('click', () => {
+            buildTab.classList.add('active');
+            uploadTab.classList.remove('active');
+            buildForm.classList.remove('d-none');
+            uploadForm.classList.add('d-none');
+            formTitle.textContent = 'Build Your Resume';
+        });
+
+        // File upload handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('resumeFile');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const removeFile = document.getElementById('removeFile');
+        
+        // Add event listeners for drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropZone.classList.add('active');
+        }
+        
+        function unhighlight() {
+            dropZone.classList.remove('active');
+        }
+        
+        dropZone.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+        
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        function handleFiles(files) {
+            if (files.length) {
+                const file = files[0];
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size exceeds 5MB limit');
+                    return;
+                }
+                
+                fileName.textContent = file.name;
+                fileInfo.classList.remove('d-none');
+                dropZone.classList.add('active');
+            }
+        }
+        
+        removeFile.addEventListener('click', function() {
+            fileInput.value = '';
+            fileInfo.classList.add('d-none');
+            dropZone.classList.remove('active');
+        });
+        
+        // Form submission
+        const form = document.getElementById('resumeForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const progressText = document.getElementById('progressText');
+        const previewPlaceholder = document.getElementById('previewPlaceholder');
+        const previewContent = document.getElementById('previewContent');
+        const previewContainer = document.getElementById('previewContainer');
+        const matchScore = document.getElementById('matchScore');
+        const scoreValue = document.getElementById('scoreValue');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const file = fileInput.files[0];
+            const jobDescription = document.getElementById('jobDescription').value.trim();
+            
+            if (!file) {
+                alert('Please upload your resume file');
+                return;
+            }
+            
+            if (!jobDescription) {
+                alert('Please enter the job description');
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Optimizing...';
+            progressBar.classList.remove('d-none');
+            progressText.textContent = 'Optimizing your resume...';
+            
+            // Simulate progress (in a real app, this would be from actual upload/processing)
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // Show results after progress completes
+                    setTimeout(() => {
+                        showResults();
+                    }, 500);
+                }
+                
+                progressFill.style.width = `${progress}%`;
+                progressPercent.textContent = `${Math.round(progress)}%`;
+            }, 300);
+        });
+        
+        function showResults() {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-magic me-2"></i> Optimize My Resume';
+            
+            // Hide progress bar
+            progressBar.classList.add('d-none');
+            
+            // Show preview content
+            previewPlaceholder.classList.add('d-none');
+            previewContent.classList.remove('d-none');
+            
+            // Generate sample preview content
+
+            // Show match score with animation
+            matchScore.classList.remove('d-none');
+            animateValue(scoreValue, 0, 87, 1500);
+        }
+        
+        // Resume Builder Form
+        const resumeBuilderForm = document.getElementById('resumeBuilderForm');
+        const buildSubmitBtn = document.getElementById('buildSubmitBtn');
+        const skillInput = document.getElementById('skillInput');
+        const skillsContainer = document.getElementById('skillsContainer');
+        const skillSuggestions = document.getElementById('skillSuggestions');
+        const experienceContainer = document.getElementById('experienceContainer');
+        const educationContainer = document.getElementById('educationContainer');
+        const addExperience = document.getElementById('addExperience');
+        const addEducation = document.getElementById('addEducation');
+        
+        // Common skills for suggestions
+        const commonSkills = [
+            'JavaScript', 'Python', 'Java', 'C++', 'C#', 'PHP', 'Swift', 'Kotlin',
+            'React', 'Angular', 'Vue.js', 'Node.js', 'Django', 'Spring', 'Laravel',
+            'SQL', 'MySQL', 'PostgreSQL', 'MongoDB', 'Firebase',
+            'AWS', 'Azure', 'Google Cloud', 'Docker', 'Kubernetes',
+            'Git', 'GitHub', 'GitLab', 'CI/CD', 'Agile', 'Scrum',
+            'Project Management', 'Team Leadership', 'Communication', 'Problem Solving'
+        ];
+        
+        // Initialize form with one experience and education entry
+        addExperienceItem();
+        addEducationItem();
+        
+        // Add experience item
+        function addExperienceItem() {
+            const id = Date.now();
+            const item = document.createElement('div');
+            item.className = 'experience-item';
+            item.innerHTML = `
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Job Title</label>
+                        <input type="text" name="experience[${id}][title]" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Company</label>
+                        <input type="text" name="experience[${id}][company]" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Start Date</label>
+                        <input type="text" name="experience[${id}][start]" class="form-control" placeholder="MM/YYYY" required>
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">End Date</label>
+                        <input type="text" name="experience[${id}][end]" class="form-control" placeholder="MM/YYYY or Present">
+                    </div>
+                </div>
+                <div class="input-container">
+                    <label class="floating-label">Responsibilities (one per line)</label>
+                    <textarea name="experience[${id}][responsibilities]" rows="3" class="form-control" placeholder="Describe your responsibilities and achievements..." required></textarea>
+                </div>
+                <button type="button" class="btn btn-link text-danger p-0 d-flex align-items-center mt-2 remove-item">
+                    <i class="fas fa-trash-alt me-1"></i> Remove Experience
+                </button>
+            `;
+            experienceContainer.appendChild(item);
+            
+            // Add remove functionality
+            const removeBtn = item.querySelector('.remove-item');
+            removeBtn.addEventListener('click', () => {
+                if (experienceContainer.children.length > 1) {
+                    item.remove();
+                } else {
+                    alert('You need at least one experience entry');
+                }
+            });
+        }
+        
+        // Add education item
+        function addEducationItem() {
+            const id = Date.now();
+            const item = document.createElement('div');
+            item.className = 'education-item';
+            item.innerHTML = `
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Degree</label>
+                        <input type="text" name="education[${id}][degree]" class="form-control" placeholder="e.g. Bachelor of Science in Computer Science" required>
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Institution</label>
+                        <input type="text" name="education[${id}][institution]" class="form-control" placeholder="University Name" required>
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Graduation Year</label>
+                        <input type="text" name="education[${id}][year]" class="form-control" placeholder="YYYY" required>
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Field of Study</label>
+                        <input type="text" name="education[${id}][field]" class="form-control" placeholder="e.g. Computer Science">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-link text-danger p-0 d-flex align-items-center mt-2 remove-item">
+                    <i class="fas fa-trash-alt me-1"></i> Remove Education
+                </button>
+            `;
+            educationContainer.appendChild(item);
+            
+            // Add remove functionality
+            const removeBtn = item.querySelector('.remove-item');
+            removeBtn.addEventListener('click', () => {
+                if (educationContainer.children.length > 1) {
+                    item.remove();
+                } else {
+                    alert('You need at least one education entry');
+                }
+            });
+        }
+        
+                  // Add experience button
+                  addExperience.addEventListener('click', addExperienceItem);
+        
+                  // Add education button
+                  addEducation.addEventListener('click', addEducationItem);
+        
+                  // Skill input handling
+                  skillInput.addEventListener('keydown', (e) => {
+                      if (e.key === 'Enter') {
+                          e.preventDefault();
+                          addSkill(skillInput.value.trim());
+                          skillInput.value = '';
+                          skillSuggestions.classList.add('d-none');
+                      }
+                  });
+        
+                  skillInput.addEventListener('input', () => {
+                      const value = skillInput.value.trim().toLowerCase();
+                      if (value.length > 0) {
+                          const filtered = commonSkills.filter(skill => 
+                              skill.toLowerCase().includes(value) && 
+                              !Array.from(skillsContainer.children).some(el => 
+                                  el.textContent.replace('×', '').trim().toLowerCase() === skill.toLowerCase()
+                              )
+                          );
+                
+                          if (filtered.length > 0) {
+                              skillSuggestions.innerHTML = '';
+                              filtered.slice(0, 5).forEach(skill => {
+                                  const item = document.createElement('div');
+                                  item.className = 'suggestion-item';
+                                  item.textContent = skill;
+                                  item.addEventListener('click', () => {
+                                      addSkill(skill);
+                                      skillInput.value = '';
+                                      skillSuggestions.classList.add('d-none');
+                                  });
+                                  skillSuggestions.appendChild(item);
+                              });
+                              skillSuggestions.classList.remove('d-none');
+                          } else {
+                              skillSuggestions.classList.add('d-none');
+                          }
+                      } else {
+                          skillSuggestions.classList.add('d-none');
+                      }
+                  });
+        
+                  document.addEventListener('click', (e) => {
+                      if (!skillInput.contains(e.target) && !skillSuggestions.contains(e.target)) {
+                          skillSuggestions.classList.add('d-none');
+                      }
+                  });
+        
+                  // Add skill to container
+                  function addSkill(skill) {
+                      if (skill && !Array.from(skillsContainer.children).some(el => 
+                          el.textContent.replace('×', '').trim().toLowerCase() === skill.toLowerCase()
+                      )) {
+                          const tag = document.createElement('div');
+                          tag.className = 'skill-tag';
+                          tag.innerHTML = `
+                              ${skill}
+                              <button type="button" class="remove-skill">
+                                  <i class="fas fa-times"></i>
+                              </button>
+
+                              <input type="hidden" name="skills" value="${skill}">
+                          `;
+                          skillsContainer.appendChild(tag);
+                
+                          // Add remove functionality
+                          const removeBtn = tag.querySelector('.remove-skill');
+                          removeBtn.addEventListener('click', () => {
+                              tag.remove();
+                          });
+                      }
+                  }
+        
+                  // Floating label functionality
+                  document.querySelectorAll('.input-container input, .input-container textarea').forEach(input => {
+                      const container = input.parentElement;
+            
+                      input.addEventListener('focus', () => {
+                          container.classList.add('focused');
+                      });
+            
+                      input.addEventListener('blur', () => {
+                          if (!input.value) {
+                              container.classList.remove('focused');
+                          }
+                      });
+            
+                      // Initialize based on content
+                      if (input.value) {
+                          container.classList.add('focused');
+                      }
+                  });
+        
+// Resume builder form submission
+resumeBuilderForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+  
+    // Validate required fields
+    const firstName = document.getElementById('firstName').value.trim();
+    const professionalTitle = document.getElementById('professionalTitle').value.trim();
+    const professionalSummary = document.getElementById('professionalSummary').value.trim();
+  
+    if (!firstName) {
+      alert('Please enter your first name');
+      return;
+    }
+  
+    if (!professionalTitle) {
+      alert('Please enter your professional title');
+      return;
+    }
+  
+    if (!professionalSummary) {
+      alert('Please enter your professional summary');
+      return;
+    }
+  
+    // Extract all form field values
+    const formData = new FormData(resumeBuilderForm);
+    const jsonData = {};
+  
+    for (const [key, value] of formData.entries()) {
+      if (key.endsWith('[]')) {
+        const baseKey = key.slice(0, -2);
+        if (!jsonData[baseKey]) {
+          jsonData[baseKey] = [];
+        }
+        jsonData[baseKey].push(value.trim());
+      } else {
+        jsonData[key] = value.trim();
+      }
+    }
+  
+    // Extract skills
+    const skills = Array.from(skillsContainer.children).map(skill => skill.textContent.trim());
+  
+    if (skills.length === 0) {
+      alert('Please add at least one skill');
+      return;
+    }
+  
+    // Overwrite the skills field in jsonData
+    jsonData.skills = skills;
+  
+    // Optional: Set skills to form's dataset (as a comma-separated string)
+    const form = document.getElementById('resumeBuilderForm');
+
+    
+
+    document.addEventListener('htmx:configRequest', function (evt) {
+        var form = evt.target.closest('form');
+        if (form) {
+            var formData = new FormData(form);
+            formData.append('skills', skills);  // Adding skill parameter
+            evt.detail.parameters = Object.fromEntries(formData.entries());
+        }
+    });
+
+
+    console.log(jsonData);
+  
+    // Show loading state
+    buildSubmitBtn.disabled = true;
+    buildSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Generating...';
+    progressBar.classList.remove('d-none');
+    progressText.textContent = 'Generating your resume...';
+  
+    // Simulate progress
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 15;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+  
+        setTimeout(() => {
+          showBuilderResults();
+        }, 500);
+      }
+  
+      progressFill.style.width = `${progress}%`;
+      progressPercent.textContent = `${Math.round(progress)}%`;
+    }, 300);
+  });
+  
+        
+                  function showBuilderResults() {
+                      buildSubmitBtn.disabled = false;
+                      buildSubmitBtn.innerHTML = '<i class="fas fa-magic me-2"></i> Generate My Resume';
+            
+                      // Hide progress bar
+                      progressBar.classList.add('d-none');
+            
+                      // Show preview content
+                      previewPlaceholder.classList.add('d-none');
+                      previewContent.classList.remove('d-none');
+            
+                      // Get form values
+                      const firstName = document.getElementById('firstName').value.trim();
+                      const lastName = document.getElementById('lastName').value.trim();
+                      const professionalTitle = document.getElementById('professionalTitle').value.trim();
+                      const location = document.getElementById('location').value.trim();
+                      const email = document.getElementById('email').value.trim();
+                      const phone = document.getElementById('phone').value.trim();
+                      const linkedin = document.getElementById('linkedin').value.trim();
+                      const portfolio = document.getElementById('portfolio').value.trim();
+                      const professionalSummary = document.getElementById('professionalSummary').value.trim();
+
+                      // Get form element
+                      const form = document.getElementById('resumeBuilderForm');
+            
+            
+                      // Generate skills list
+                      const skills = Array.from(skillsContainer.children).map(el => 
+                          el.textContent.replace('×', '').trim()
+                      );
+            
+                      // Generate experience items
+                      const experienceItems = Array.from(experienceContainer.children).map(item => {
+                          return {
+                              title: item.querySelector('input[name*="title"]').value.trim(),
+                              company: item.querySelector('input[name*="company"]').value.trim(),
+                              start: item.querySelector('input[name*="start"]').value.trim(),
+                              end: item.querySelector('input[name*="end"]').value.trim(),
+                              responsibilities: item.querySelector('textarea').value.trim().split('\n').filter(line => line.trim())
+                          };
+                      });
+            
+                      // Generate education items
+                      const educationItems = Array.from(educationContainer.children).map(item => {
+                          return {
+                              degree: item.querySelector('input[name*="degree"]').value.trim(),
+                              institution: item.querySelector('input[name*="institution"]').value.trim(),
+                              year: item.querySelector('input[name*="year"]').value.trim(),
+                              field: item.querySelector('input[name*="field"]').value.trim()
+                          };
+                      });
+            
+                      // Generate preview HTML
+                      let previewHTML = `
+                          <div class="p-4">
+                              <div class="bg-white rounded shadow-sm p-4">
+                                  <div class="d-flex justify-content-between align-items-start mb-4">
+                                      <div>
+                                          <h3 class="fs-3 fw-bold text-body">${firstName} ${lastName}</h3>
+                                          <p class="text-muted">${professionalTitle} | ${location}</p>
+                                      </div>
+                                      <div class="text-end small text-muted">
+                                          ${email ? `<div><i class="fas fa-envelope me-1"></i> ${email}</div>` : ''}
+                                          ${phone ? `<div><i class="fas fa-phone me-1"></i> ${phone}</div>` : ''}
+                                          ${linkedin ? `<div><i class="fab fa-linkedin me-1"></i> ${linkedin.replace('https://', '')}</div>` : ''}
+                                          ${portfolio ? `<div><i class="fas fa-globe me-1"></i> ${portfolio.replace('https://', '')}</div>` : ''}
+                                      </div>
+                                  </div>
+                        
+                                  <div class="border-top pt-4 mb-4">
+                                      <h4 class="fw-bold text-body mb-2">Professional Summary</h4>
+                                      <p class="text-body">${professionalSummary}</p>
+                                  </div>
+                        
+                                  ${skills.length > 0 ? `
+                                  <div class="border-top pt-4 mb-4">
+                                      <h4 class="fw-bold text-body mb-2">Skills</h4>
+                                      <div class="d-flex flex-wrap gap-2">
+                                          ${skills.map(skill => `<span class="badge bg-primary bg-opacity-10 text-primary" name="skills">${skill}</span>`).join('')}
+                                      </div>
+                                  </div>
+                                  ` : ''}
+                        
+                                  ${experienceItems.length > 0 ? `
+                                  <div class="border-top pt-4">
+                                      <h4 class="fw-bold text-body mb-2">Experience</h4>
+                                      ${experienceItems.map(exp => `
+                                          <div class="mb-4">
+                                              <h5 class="fw-semibold text-body">${exp.title}</h5>
+                                              <p class="text-muted">${exp.company} | ${exp.start} - ${exp.end || 'Present'}</p>
+                                              ${exp.responsibilities.length > 0 ? `
+                                              <ul class="list-disc ps-3 text-body mt-2">
+                                                  ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                                              </ul>
+                                              ` : ''}
+                                          </div>
+                                      `).join('')}
+                                  </div>
+                                  ` : ''}
+                        
+                                  ${educationItems.length > 0 ? `
+                                  <div class="border-top pt-4">
+                                      <h4 class="fw-bold text-body mb-2">Education</h4>
+                                      ${educationItems.map(edu => `
+                                          <div class="mb-4">
+                                              <h5 class="fw-semibold text-body">${edu.degree}</h5>
+                                              <p class="text-muted">${edu.institution} ${edu.year ? `| ${edu.year}` : ''}</p>
+                                              ${edu.field ? `<p class="text-muted">${edu.field}</p>` : ''}
+                                          </div>
+                                      `).join('')}
+                                  </div>
+                                  ` : ''}
+                              </div>
+                          </div>
+                      `;
+            
+                      previewContent.innerHTML = previewHTML;
+            
+                      // If job description was provided, show match score
+                      const jobDescription = document.getElementById('buildJobDescription').value.trim();
+                      if (jobDescription) {
+                          matchScore.classList.remove('d-none');
+                          animateValue(scoreValue, 0, calculateMatchScore(jobDescription, skills, professionalSummary, experienceItems), 1500);
+                      } else {
+                          matchScore.classList.add('d-none');
+                      }
+                  }
+        
+                  // Calculate a match score based on job description content
+                  function calculateMatchScore(jobDescription, skills, summary, experienceItems) {
+                      // Simple scoring algorithm (in a real app, this would be more sophisticated)
+                      let score = 50; // Base score
+            
+                      // Check for keywords in skills
+                      const skillKeywords = extractKeywords(jobDescription).filter(keyword => 
+                          skills.some(skill => skill.toLowerCase().includes(keyword.toLowerCase()))
+                      );
+                      score += Math.min(skillKeywords.length * 5, 20); // Up to 20 points for skills
+            
+                      // Check for keywords in summary
+                      const summaryKeywords = extractKeywords(jobDescription).filter(keyword => 
+                          summary.toLowerCase().includes(keyword.toLowerCase())
+                      );
+                      score += Math.min(summaryKeywords.length * 3, 15); // Up to 15 points for summary
+            
+                      // Check for keywords in experience
+                      const expText = experienceItems.map(exp => 
+                          `${exp.title} ${exp.company} ${exp.responsibilities.join(' ')}`
+                      ).join(' ');
+                      const expKeywords = extractKeywords(jobDescription).filter(keyword => 
+                          expText.toLowerCase().includes(keyword.toLowerCase())
+                      );
+                      score += Math.min(expKeywords.length * 2, 15); // Up to 15 points for experience
+            
+                      return Math.min(Math.round(score), 95); // Cap at 95% to leave room for improvement
+                  }
+        
+                  // Extract keywords from job description (simplified)
+                  function extractKeywords(text) {
+            // Remove common words and extract potential keywords
+            const commonWords = ['the', 'and', 'for', 'with', 'this', 'that', 'will', 'you', 'your', 'are', 'have', 'has'];
+            const words = text.toLowerCase()
+                .replace(/[^\w\s]/g, '')
+                .split(/\s+/)
+                .filter(word => word.length > 3 && !commonWords.includes(word));
+            
+            // Return unique words
+            return [...new Set(words)].slice(0, 20); // Limit to top 20 keywords
+        }
+        
+        // Animate the match score value
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Resize handle functionality
+        const resizeHandle = document.querySelector('.resize-handle');
+        resizeHandle.addEventListener('mousedown', initResize, false);
+        
+        function initResize(e) {
+            e.preventDefault();
+            window.addEventListener('mousemove', resize);
+            window.addEventListener('mouseup', stopResize);
+        }
+        
+        function resize(e) {
+            const container = document.getElementById('previewContainer');
+            const newHeight = e.clientY - container.getBoundingClientRect().top;
+            if (newHeight > 200) { // Minimum height
+                container.style.height = `${newHeight}px`;
+            }
+        }
+        
+        function stopResize() {
+            window.removeEventListener('mousemove', resize);
+            window.removeEventListener('mouseup', stopResize);
+        }
+    </script>
+</body>
+</html>

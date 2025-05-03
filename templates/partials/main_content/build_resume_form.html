@@ -1,0 +1,113 @@
+<div id="buildForm" class="form-section d-none">
+    <div class="card-body">
+        <form id="resumeBuilderForm" hx-post="/create_resume" hx-encoding="multipart/form-data" hx-target="#previewContent" hx-swap="innerHTML" enctype="multipart/form-data">
+            <!-- Personal Information -->
+            <div class="mb-4">
+                <h4 class="font-display fs-5 fw-semibold mb-3 d-flex align-items-center">
+                    <i class="fas fa-user me-2 text-primary"></i> Personal Information
+                </h4>
+                <div class="row g-3">
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control">
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control">
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control">
+                    </div>
+                    <div class="col-md-6 input-container">
+                        <label class="floating-label">Phone</label>
+                        <input type="tel" id="phone" name="contact" class="form-control">
+                    </div>
+                    <div class="col-12 input-container">
+                        <label class="floating-label">Professional Title</label>
+                        <input type="text" id="professionalTitle" name="professionalTitle" class="form-control" placeholder="e.g. Software Engineer">
+                    </div>
+                    <div class="col-12 input-container">
+                        <label class="floating-label">Location</label>
+                        <input type="text" id="location" name="location" class="form-control" placeholder="e.g. San Francisco, CA">
+                    </div>
+                    <div class="col-12 input-container">
+                        <label class="floating-label">LinkedIn Profile</label>
+                        <input type="url" id="linkedin" name="linkedin" class="form-control" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+                    <div class="col-12 input-container">
+                        <label class="floating-label">Portfolio/Website</label>
+                        <input type="url" id="portfolio" name="portfolio" class="form-control" placeholder="https://yourwebsite.com">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Professional Summary -->
+            <div class="mb-4">
+                <h4 class="font-display fs-5 fw-semibold mb-3 d-flex align-items-center">
+                    <i class="fas fa-file-signature me-2 text-primary"></i> Professional Summary
+                </h4>
+                <textarea id="professionalSummary" rows="4" name="professionalSummary" class="form-control" placeholder="Write a brief summary of your professional background and key skills..."></textarea>
+                <p class="small text-muted mt-1">Tip: Keep it concise (3-5 sentences) and highlight your most relevant experience.</p>
+            </div>
+            
+            <!-- Skills -->
+            <div class="mb-4">
+                <h4 class="font-display fs-5 fw-semibold mb-3 d-flex align-items-center">
+                    <i class="fas fa-tools me-2 text-primary"></i> Skills
+                </h4>
+                <div class="position-relative">
+                    <div class="input-container">
+                        <label class="floating-label">Add Skill</label>
+                        <input type="text" id="skillInput"  class="form-control" placeholder="Type a skill and press Enter">
+                    </div>
+                    <div id="skillSuggestions" class="suggestions-dropdown d-none"></div>
+                </div>
+                <div id="skillsContainer" class="d-flex flex-wrap mt-3">
+                    <!-- Skills will be added here -->
+                </div>
+                <p class="small text-muted mt-2">Tip: Include both technical and soft skills relevant to your target job.</p>
+            </div>
+            
+            <!-- Work Experience -->
+            <div class="mb-4">
+                <h4 class="font-display fs-5 fw-semibold mb-3 d-flex align-items-center">
+                    <i class="fas fa-briefcase me-2 text-primary"></i> Work Experience
+                </h4>
+                <div id="experienceContainer">
+                    <!-- Experience items will be added here -->
+                </div>
+                <button type="button" id="addExperience" class="btn btn-link text-primary p-0 d-flex align-items-center mt-3">
+                    <i class="fas fa-plus-circle me-2"></i> Add Experience
+                </button>
+            </div>
+            
+            <!-- Education -->
+            <div class="mb-4">
+                <h4 class="font-display fs-5 fw-semibold mb-3 d-flex align-items-center">
+                    <i class="fas fa-graduation-cap me-2 text-primary"></i> Education
+                </h4>
+                <div id="educationContainer">
+                    <!-- Education items will be added here -->
+                </div>
+                <button type="button" id="addEducation" class="btn btn-link text-primary p-0 d-flex align-items-center mt-3">
+                    <i class="fas fa-plus-circle me-2"></i> Add Education
+                </button>
+            </div>
+            
+            <!-- Job Description (for optimization) -->
+            <div class="mb-4">
+                <h4 class="font-display fs-5 fw-semibold mb-3 d-flex align-items-center">
+                    <i class="fas fa-bullseye me-2 text-primary"></i> Target Job Description (Optional)
+                </h4>
+                <p class="small text-muted mb-3">For best results, paste the job description you're applying to so we can tailor your resume accordingly.</p>
+                <textarea id="buildJobDescription" rows="4" class="form-control" name="buildJobDescription" placeholder="Paste the job description here..."></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" id="buildSubmitBtn" class="btn btn-primary w-100 gradient-bg py-3">
+                <i class="fas fa-magic me-2"></i> Generate My Resume
+            </button>
+        </form>
+    </div>
+</div>
