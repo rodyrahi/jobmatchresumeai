@@ -129,7 +129,7 @@ async def extract_linkedin_jd(request: Request):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)    
+    uvicorn.run("main:app", host="localhost", port=8000)    
 
     
     
