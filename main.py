@@ -72,7 +72,10 @@ async def create_resume(request: Request):
     form_data = await request.form()
     form_dict = dict(form_data)
     
-    response_letex = generate_ats_friendly_resume(form_data, form_data["jobDescription"])
+    
+    
+    print(form_dict)
+    response_letex = generate_ats_friendly_resume(form_dict, form_data["jobDescription"])
     
     
     pdf_path, folder_path = try_latex_commands(response_letex)
